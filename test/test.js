@@ -3,8 +3,8 @@ describe('this', function () {
     var obj = {
       say: function () {
         setTimeout(() => {
-          // this 是什么？想想为什么？
-          this.should.equal(null)
+          // this 是什么？想想为什么？obj.say.apply(obj);
+          this.should.equal(obj)
           done()
         }, 0)
       }
@@ -14,8 +14,8 @@ describe('this', function () {
 
   it('global', function () {
     function test() {
-      // this 是什么？想想为什么？
-      this.should.equal(null)
+      // this 是什么？想想为什么？ Object global
+      this.should.equal(global)
     }
     test()
   })
@@ -25,8 +25,8 @@ describe('this', function () {
       var obj = {
         say: function () {
           function _say() {
-            // this 是什么？想想为什么？
-            this.should.equal(null)
+            // this 是什么？想想为什么？ obj === undefined
+            this.should.equal(global)
           }
           return _say.bind(obj)
         }()
@@ -38,8 +38,8 @@ describe('this', function () {
       var obj = {}
       obj.say = function () {
         function _say() {
-          // this 是什么？想想为什么？
-          this.should.equal(null)
+          // this 是什么？想想为什么？obj
+          this.should.equal(obj)
         }
         return _say.bind(obj)
       }()
